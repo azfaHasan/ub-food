@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 const Button = ({ href, children }: { href: string, children: React.ReactNode }) => (
@@ -7,14 +6,13 @@ const Button = ({ href, children }: { href: string, children: React.ReactNode })
   </Link>
 );
 
-export default function LoginSelection() {
+export default function RegisterSelection() {
   return (
     <div style={{ maxWidth: '400px', margin: '50px auto', background: '#light-blue', padding: '20px' }}>
       <h1>UB Food</h1>
-      <Button href="/login/user">Login Sebagai User</Button>
-      <Button href="/login/penjual">Login Sebagai Penjual</Button>
-      <Button href="/login/admin">Login Sebagai Admin</Button>
-      <Link href="/register">Belum ada akun ?</Link>
+      <Button href="/register/user">Register Sebagai User</Button>
+      <Button href="/register/penjual">Register Sebagai Penjual</Button>
+      <Link href="/register">Sudah ada akun ?</Link>
     </div>
   );
 }

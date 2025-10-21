@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  PENJUAL
+  ADMIN
+}
+
+model Akun {
+  id_akun         String    @id @default(cuid())
+  username        String    @unique
+  email           String    @unique
+  password        String    // hash pw
+  foto_akun       String?
+  role            Role      // role akun
+  tanggal_bergabung DateTime  @default(now())
+
+  // Relasi satu-ke-satu
+  User            User?
+  Penjual         Penjual?
+  Admin           Admin?
+}
+
+model User {
+  id_user     String  @id @default(cuid())
+  id_akun     String  @unique // Foreign Key
+  no_hp_user  String?
+  nama_user   String
+  Akun        Akun    @relation(fields: [id_akun], references: [id_akun], onDelete: Cascade)
+}
+
+model Penjual {
+  id_penjual    String  @id @default(cuid())
+  id_akun       String  @unique // Foreign Key
+  no_hp_penjual String?
+  nama_penjual  String
+  Akun          Akun    @relation(fields: [id_akun], references: [id_akun], onDelete: Cascade)
+}
+
+model Admin {
+  id_admin  String  @id @default(cuid())
+  id_akun   String  @unique // Foreign Key
+  Akun      Akun    @relation(fields: [id_akun], references: [id_akun], onDelete: Cascade)
+}
