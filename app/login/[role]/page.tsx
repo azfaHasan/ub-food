@@ -17,7 +17,6 @@ export default function LoginPage() {
     e.preventDefault();
     setError("");
 
-    // Kirim data ke CredentialsProvider
     const result = await signIn("credentials", {
       redirect: false,
       email: email,
