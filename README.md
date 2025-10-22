@@ -14,6 +14,22 @@ npm -v
 
 Jalankan kedua command di cmd admin atau terminal VScode.
 
+## Cloning Repository
+
+Bikin folder baru dengan nama ub-food atau yang lain.
+
+Copy path folder yang udah dibuat di terminal.
+
+```bash
+cd alamat folder kalian
+# misalnya cd C:\Users\NamaAnda\Projects
+```
+
+Jalankan ini di Git Bash dalam folder terkait untuk cloning.
+```bash
+git clone [URL_REPOSITORY_ANDA_DI_SINI]
+```
+
 ## Selesai Install
 
 Jalankan ini di terminal untuk install semua dependency.
@@ -45,3 +61,7 @@ npm run dev
 ```
 
 Kemudian untuk menghentikan projek bisa interupsi terminal dengan `Ctrl + C` atau lainnya.
+
+## Last
+
+Bikin branch baru namanya terserah ya buat workbench teman-teman.
