@@ -15,7 +15,7 @@ export default function RegisterPage() {
 
   const params = useParams();
   const router = useRouter();
-  const role = params.role as string; // 'user' atau 'penjual'
+  const role = params.role as string; // User atau Penjual
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

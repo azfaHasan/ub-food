@@ -46,7 +46,6 @@ export const authConfig: NextAuthConfig = {
           return null;
         }
 
-        // Return data user sesuai dengan tipe 'User' di next-auth.d.ts
         return {
           id: akun.id_akun,
           email: akun.email,
@@ -65,13 +64,12 @@ export const authConfig: NextAuthConfig = {
       return token;
     },
 
-    // [FIX #3] 'session' dan 'token' sekarang memiliki tipe yang benar
     async session({ session, token }) {
       if (session.user && token.sub) {
-        session.user.id = token.sub; // 'sub' adalah 'id' user
-        session.user.role = token.role; // 'token.role' dari callback jwt
+        session.user.id = token.sub;
+        session.user.role = token.role;
       }
-      return session; // <- Tidak perlu 'as any' lagi
+      return session;
     },
   },
   pages: {
