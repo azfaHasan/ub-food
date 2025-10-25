@@ -6,7 +6,7 @@ export default function LogoutButton() {
   return (
     <button 
       onClick={() => signOut({ 
-        callbackUrl: '/' // Redirect, nanti diganti ke home aja
+        callbackUrl: '/'
       })}
     >
       Logout

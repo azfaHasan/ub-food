@@ -28,7 +28,6 @@ model Akun {
   role            Role      // role akun
   tanggal_bergabung DateTime  @default(now())
 
-  // Relasi satu-ke-satu
   User            User?
   Penjual         Penjual?
   Admin           Admin?
@@ -36,22 +35,52 @@ model Akun {
 
 model User {
   id_user     String  @id @default(cuid())
-  id_akun     String  @unique // Foreign Key
+  id_akun     String  @unique // FK
   no_hp_user  String?
   nama_user   String
+
   Akun        Akun    @relation(fields: [id_akun], references: [id_akun], onDelete: Cascade)
 }
 
 model Penjual {
   id_penjual    String  @id @default(cuid())
-  id_akun       String  @unique // Foreign Key
+  id_akun       String  @unique // FK
   no_hp_penjual String?
   nama_penjual  String
+
   Akun          Akun    @relation(fields: [id_akun], references: [id_akun], onDelete: Cascade)
+  Kantin Kantin[]
 }
 
 model Admin {
   id_admin  String  @id @default(cuid())
-  id_akun   String  @unique // Foreign Key
+  id_akun   String  @unique // FK
+
   Akun      Akun    @relation(fields: [id_akun], references: [id_akun], onDelete: Cascade)
+}
+
+model Kantin {
+  id_kantin       String  @id @default(cuid())
+  id_penjual      String // FK
+  nama_kantin     String
+  jam_buka        DateTime? @db.Time
+  jam_tutup       DateTime? @db.Time
+  deskripsi_kantin String? @db.Text
+  foto_kantin     String?
+  lokasi          String?
+
+  Penjual Penjual @relation(fields: [id_penjual], references: [id_penjual], onDelete: Cascade)
+  Menu    Menu[]
+}
+
+model Menu {
+  id_menu        String  @id @default(cuid())
+  id_kantin      String // FK
+  nama_menu      String
+  deskripsi_menu String? @db.Text
+  harga_menu     Float
+  foto_menu      String?
+  stok_menu      Int     @default(0)
+
+  Kantin Kantin @relation(fields: [id_kantin], references: [id_kantin], onDelete: Cascade)
 }

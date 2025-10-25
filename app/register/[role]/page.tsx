@@ -87,7 +87,7 @@ export default function RegisterPage() {
         
         <button type="submit">Register</button>
       </form>
-      <Link href="/">Sudah punya akun ?</Link>
+      <Link href="/login">Sudah punya akun ?</Link>
     </div>
   );
 }

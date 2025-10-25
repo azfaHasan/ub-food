@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -27,7 +28,7 @@ export default function LoginPage() {
     if (result?.error) {
       setError("Email atau password salah, atau role tidak sesuai.");
     } else if (result?.ok) {
-      router.push(`/${role}`); 
+      router.push(`/${role}`);
     }
   };
 
@@ -45,6 +46,7 @@ export default function LoginPage() {
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit">Login</button>
+        <Link href="/register">Belum ada akun ?</Link>
       </form>
     </div>
   );
