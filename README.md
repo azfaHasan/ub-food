@@ -48,8 +48,6 @@ Jalankan ini untuk generate secret.
 npx auth secret
 ```
 
-Jalankan ini untuk generate key
-
 ## Keperluan Database
 
 Jalankan server MySQL (Laragon atau XAMPP).
