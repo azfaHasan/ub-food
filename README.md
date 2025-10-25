@@ -30,7 +30,11 @@ Jalankan ini di Git Bash dalam folder terkait untuk cloning.
 git clone [URL_REPOSITORY_ANDA_DI_SINI]
 ```
 
-## Selesai Install
+Pada GitHub desktop akses menu `file` -> `add local repository` -> pilih folder kalian yang sudah dibuat.
+
+Buat branch baru untuk workbench teman-teman.
+
+## Selesai Cloning
 
 Jalankan ini di terminal untuk install semua dependency.
 
@@ -38,18 +42,32 @@ Jalankan ini di terminal untuk install semua dependency.
 npm install
 ```
 
+Jalankan ini untuk generate secret.
+
+```bash
+npx auth secret
+```
+
+Jalankan ini untuk generate key
+
 ## Keperluan Database
 
 Jalankan server MySQL (Laragon atau XAMPP).
 
 Buat koneksi baru dan database baru misalnya `dbSaya`
 
-Ubah isi file `.env.example`, dan ubah namanya menjadi `.env`
+Copy file `.env.example`, dan ubah nama file copynya menjadi `.env`, kemudian isi data database teman-teman.
 
 Jalankan ini untuk membuat semua tabel di database.
 
 ```bash
 npm prisma migrate dev
+```
+
+Jika migrate tidak bisa dijalankan bisa hapus folder `node_modules` dan file `package-lock.json`, kemudian jalankan lagi command ini.
+
+```bash
+npm install
 ```
 
 ## Menjalankan dan Mematikan Projek
@@ -61,7 +79,3 @@ npm run dev
 ```
 
 Kemudian untuk menghentikan projek bisa interupsi terminal dengan `Ctrl + C` atau lainnya.
-
-## Last
-
-Bikin branch baru namanya terserah ya buat workbench teman-teman.
