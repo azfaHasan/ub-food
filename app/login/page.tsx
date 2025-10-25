@@ -6,13 +6,14 @@ const Button = ({ href, children }: { href: string, children: React.ReactNode })
   </Link>
 );
 
-export default function RegisterSelection() {
+export default function LoginSelection() {
   return (
     <div style={{ maxWidth: '400px', margin: '50px auto', background: '#light-blue', padding: '20px' }}>
       <h1>UB Food</h1>
-      <Button href="/register/user">Register Sebagai User</Button>
-      <Button href="/register/penjual">Register Sebagai Penjual</Button>
-      <Link href="/login">Sudah ada akun ?</Link>
+      <Button href="/login/user">Login Sebagai User</Button>
+      <Button href="/login/penjual">Login Sebagai Penjual</Button>
+      <Button href="/login/admin">Login Sebagai Admin</Button>
+      <Link href="/register">Belum ada akun ?</Link>
     </div>
   );
 }
