@@ -59,15 +59,50 @@ export const authConfig: NextAuthConfig = {
     async jwt({ token, user }) {
       if (user) {
         token.role = user.role;
-        token.id = user.id;
+        token.accountId = user.id;
+        token.name = user.name;
+        token.email = user.email;
+        if (user.role === Role.USER) {
+          try {
+            const appUser = await prisma.user.findUnique({
+              where: { id_akun: user.id },
+              select: { id_user: true },
+            });
+            if (appUser) {
+              token.userId = appUser.id_user;
+            }
+          } catch (e) {
+            console.error("Gagal fetch id_user untuk token:", e);
+          }
+        } else if (user.role === Role.PENJUAL) {
+          try {
+            const appPenjual = await prisma.penjual.findUnique({
+              where: { id_akun: user.id },
+              select: { id_penjual: true },
+            });
+            if (appPenjual) {
+              token.penjualId = appPenjual.id_penjual;
+            }
+          } catch (e) {
+            console.error("Gagal fetch id_penjual untuk token:", e);
+          }
+        }
       }
       return token;
     },
 
     async session({ session, token }) {
-      if (session.user && token.sub) {
-        session.user.id = token.sub;
+      if (token.role === Role.USER && session.user && token.userId) {
+        session.user.id = token.userId;
         session.user.role = token.role;
+        
+      } else if (token.role === Role.PENJUAL && token.penjualId) {
+        session.penjual = {
+          id: token.penjualId,
+          role: token.role,
+          name: token.name || undefined,
+          email: token.email || undefined,
+        };
       }
       return session;
     },

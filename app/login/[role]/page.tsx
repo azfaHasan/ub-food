@@ -44,8 +44,10 @@ export default function LoginPage() {
           <label>Password:</label>
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         </div>
+        <div>
+          <button type="submit">Login</button>
+        </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Login</button>
         <Link href="/register">Belum ada akun ?</Link>
       </form>
     </div>
