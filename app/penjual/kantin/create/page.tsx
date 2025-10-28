@@ -129,7 +129,7 @@ export default function BuatKantinPage() {
         </div>
         
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        (success && <p style={{ color: 'green' }}>{success}</p>)
+        {success && <p style={{ color: 'green' }}>{success}</p>}
         
         <button type="submit" disabled={isLoading} style={{ padding: '10px 20px' }}>
           {isLoading ? 'Menyimpan...' : 'Simpan Kantin'}

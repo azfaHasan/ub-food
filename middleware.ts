@@ -41,7 +41,8 @@ export default auth((req) => {
   if (!session) {
   	const isProtectedRoute =
   	  pathname.startsWith("/admin") ||
-  	  pathname.startsWith("/penjual");
+  	  pathname.startsWith("/penjual") ||
+        pathname.startsWith("/user");
 
   	if (isProtectedRoute) {
       const response = NextResponse.redirect(new URL("/login", req.url));

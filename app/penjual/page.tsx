@@ -15,6 +15,10 @@ export default async function PenjualDashboardPage() {
   	redirect("/");
   }
 
+  if (!session) {
+    redirect("/login");
+  }
+
   if (!penjual) {
   	redirect("/");
   }
@@ -33,6 +37,11 @@ export default async function PenjualDashboardPage() {
   	  <h1>Dashboard Penjual</h1>
   	  <p>Selamat datang, {session?.user?.name || "Penjual"}!</p>
   	  <p>Role Anda: {session?.user?.role}</p>
+      <Link href="/penjual/profile">
+        <button style={{ padding: "8px 12px", cursor: "pointer", marginRight: "10px" }}>
+          Edit Profile Penjual
+        </button>
+      </Link>
   	  <LogoutButton />
   	  <hr style={{ margin: "20px 0" }} />
   	  <section>
@@ -55,7 +64,7 @@ export default async function PenjualDashboardPage() {
   		</Link>
 
   		{daftarKantin.length === 0 ? (
-  		  <p>Anda belum memiliki kantin. Silakan buat kantin baru.</p>
+  		  <p>Belum ada kantin</p>
   		) : (
   		  <ul style={{ listStyle: "none", padding: 0 }}>
   			{daftarKantin.map((kantin) => (
