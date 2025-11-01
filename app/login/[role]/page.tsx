@@ -116,6 +116,6 @@ export default function LoginPage() {
           Belum ada akun?
         </Link>
       </form>
-    </div>
+      </div>
   );
 }
