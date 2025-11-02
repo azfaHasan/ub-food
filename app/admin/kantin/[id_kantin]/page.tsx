@@ -1,7 +1,8 @@
 export const dynamic = 'force-dynamic';
 
 import { prisma } from "@/lib/prisma";
-import { getAuthenticatedPenjual } from "@/lib/auth";
+import { auth } from "@/auth";
+import { Role } from "@prisma/client";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import MenuListItem from "@/components/MenuListItem";
@@ -21,26 +22,27 @@ function formatJam(date: Date | null): string {
   });
 }
 
-export default async function DetailKantinPage({
+export default async function AdminDetailKantinPage({
   params,
 }: DetailKantinPageProps) {
 
-  let penjual;
-  try {
-    penjual = await getAuthenticatedPenjual();
-  } catch (error) {
+  const session = await auth();
+  if (!session?.user?.id) {
     redirect("/login");
   }
-
-  if (!penjual) {
-    return notFound();
+  if (session.user.role !== Role.ADMIN) {
+    redirect("/");
   }
 
   const kantin = await prisma.kantin.findFirst({
     where: {
       id_kantin: params.id_kantin,
-      id_penjual: penjual.id_penjual,
     },
+    include: {
+      Penjual: {
+        select: { nama_penjual: true }
+      }
+    }
   });
 
   if (!kantin) {
@@ -56,7 +58,7 @@ export default async function DetailKantinPage({
     }
   });
 
-  const baseUrl = `/penjual/kantin/${params.id_kantin}`;
+  const baseUrl = `/admin/kantin/${params.id_kantin}`;
 
   return (
     <div className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
@@ -64,12 +66,15 @@ export default async function DetailKantinPage({
         <div className="flex justify-between items-start mb-4">
           <div>
             <h1 className="text-3xl font-bold">{kantin.nama_kantin}</h1>
+            <p className="text-gray-500 font-medium">
+              Pemilik: {kantin.Penjual.nama_penjual}
+            </p>
             <p className="text-gray-600 mt-2">
-              {kantin.deskripsi_kantin || "Penjual belum menambahkan deskripsi."}
+              {kantin.deskripsi_kantin || "Tidak ada deskripsi."}
             </p>
           </div>
           <Link
-            href={`/penjual/kantin/${kantin.id_kantin}/profile`}
+            href={`/admin/kantin/${kantin.id_kantin}/profile`}
             className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 whitespace-nowrap"
           >
             Edit Profile Kantin
@@ -99,7 +104,7 @@ export default async function DetailKantinPage({
         </div>
 
         {daftarMenu.length === 0 ? (
-          <p className="text-gray-500">Belum ada menu di kantin ini. Silakan tambahkan menu.</p>
+          <p className="text-gray-500">Belum ada menu di kantin ini.</p>
         ) : (
           <ul className="space-y-4">
             {daftarMenu.map((menu) => (

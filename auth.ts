@@ -57,11 +57,12 @@ export const authConfig: NextAuthConfig = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if (user) {
+      if (user && user.id) {
         token.role = user.role;
         token.accountId = user.id;
         token.name = user.name;
         token.email = user.email;
+
         if (user.role === Role.USER) {
           try {
             const appUser = await prisma.user.findUnique({
@@ -90,20 +91,28 @@ export const authConfig: NextAuthConfig = {
       }
       return token;
     },
-
     async session({ session, token }) {
-      if (token.role === Role.USER && session.user && token.userId) {
-        session.user.id = token.userId;
+      
+      if (session.user) {
         session.user.role = token.role;
-        
+        session.user.name = token.name || session.user.name;
+        session.user.email = token.email || session.user.email;
+      }
+
+      if (token.role === Role.USER && token.userId) {
+        session.user.id = token.userId;
+      
       } else if (token.role === Role.PENJUAL && token.penjualId) {
         session.penjual = {
           id: token.penjualId,
           role: token.role,
           name: token.name || undefined,
           email: token.email || undefined,
-        };
+        }; 
+      } else if (token.role === Role.ADMIN) {
+        session.user.id = token.accountId;
       }
+      
       return session;
     },
   },

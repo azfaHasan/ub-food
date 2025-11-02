@@ -9,7 +9,7 @@ function DashboardButton({ role }: { role: string | undefined }) {
       ? "/admin"
       : role === "PENJUAL"
       ? "/penjual"
-      : "/pembeli";
+      : "/user";
 
   return (
   	<Link href={path}>
