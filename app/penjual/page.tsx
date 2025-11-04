@@ -1,5 +1,4 @@
 import { auth } from "@/auth";
-import LogoutButton from "@/components/LogoutButton";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -46,7 +45,6 @@ export default async function PenjualDashboardPage() {
       <Link href="/penjual/profile" className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700">
         Edit Profile
       </Link>
-      <LogoutButton/>
       <section className="p-6 bg-white shadow-md rounded-lg">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-semibold">Kantin Anda</h2>
@@ -69,7 +67,7 @@ export default async function PenjualDashboardPage() {
                 className="flex justify-between items-center border border-gray-200 p-4 rounded-lg"
               >
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-800">{kantin.nama_kantin}</h3>
+                  <h3 className="text-xl font-semibold text-black-800">{kantin.nama_kantin}</h3>
                   <small className="text-gray-500">{kantin.lokasi || "Lokasi belum diatur"}</small>
                 </div>
                 <Link 
