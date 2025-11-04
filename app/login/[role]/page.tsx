@@ -42,15 +42,6 @@ export default function LoginPage() {
   const router = useRouter();
   const role = params.role as string;
 
-  const getRoleLabel = (role: string) => {
-    const labels: Record<string, string> = {
-      user: "User",
-      penjual: "Penjual",
-      admin: "Admin"
-    };
-    return labels[role.toLowerCase()] || role;
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -62,15 +53,27 @@ export default function LoginPage() {
       password: password,
       role: role.toUpperCase(),
     });
-
-    setLoading(false);
-
+    
     if (result?.error) {
+      setLoading(false);
       setError("Email atau password salah, atau role tidak sesuai.");
     } else if (result?.ok) {
       router.push(`/${role}`);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="mx-auto rounded-xl my-14 px-16 flex items-center flex-col bg-[#A5C5FA] py-20 w-full max-w-md">
+        <h1 className="text-5xl font-bold mb-2">UB Food</h1>
+        <div className="w-full text-center py-20">
+          <p className="text-xl font-semibold text-gray-800 animate-pulse">
+            Memverifikasi...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto rounded-xl my-14 px-16 flex items-center flex-col bg-[#A5C5FA] py-20 w-full max-w-md">
@@ -106,9 +109,7 @@ export default function LoginPage() {
         >
           {loading ? "Loading..." : "Login"}
         </button>
-
-
-
+        
         <Link
           href="/register"
           className="text-white hover:underline font-bold text-sm mt-2 block text-left"
