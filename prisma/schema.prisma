@@ -19,6 +19,34 @@ enum Role {
   ADMIN
 }
 
+enum StatusPemesanan {
+  PENDING
+  DIPROSES
+  SIAP_DIAMBIL
+  SELESAI
+  DIBATALKAN
+}
+
+enum MetodePembayaran {
+  TUNAI
+  QRIS
+  SALDO_APP
+}
+
+enum StatusPembayaran {
+  PENDING
+  LUNAS
+  GAGAL
+}
+
+// ENUM BARU UNTUK NOTIFIKASI
+enum TipeNotifikasi {
+  PESANAN_BARU
+  STATUS_UPDATE
+  PEMBAYARAN
+  UMUM
+}
+
 model Akun {
   id_akun         String    @id @default(cuid())
   username        String    @unique
@@ -31,6 +59,8 @@ model Akun {
   User            User?
   Penjual         Penjual?
   Admin           Admin?
+
+  Notifikasi Notifikasi[]
 }
 
 model User {
@@ -40,6 +70,8 @@ model User {
   nama_user   String
 
   Akun        Akun    @relation(fields: [id_akun], references: [id_akun], onDelete: Cascade)
+  Keranjang Keranjang?
+  Pemesanan Pemesanan[]
 }
 
 model Penjual {
@@ -71,6 +103,7 @@ model Kantin {
 
   Penjual Penjual @relation(fields: [id_penjual], references: [id_penjual], onDelete: Cascade)
   Menu    Menu[]
+  Pemesanan Pemesanan[]
 }
 
 model Menu {
@@ -83,4 +116,74 @@ model Menu {
   stok_menu      Int     @default(0)
 
   Kantin Kantin @relation(fields: [id_kantin], references: [id_kantin], onDelete: Cascade)
+  DetailKeranjang DetailKeranjang[]
+  DetailPemesanan DetailPemesanan[]
+}
+
+model Keranjang {
+  id_keranjang String @id @default(cuid())
+  id_user      String @unique
+  User         User   @relation(fields: [id_user], references: [id_user], onDelete: Cascade)
+  
+  DetailKeranjang DetailKeranjang[]
+}
+
+model DetailKeranjang {
+  id_detail_keranjang String @id @default(cuid())
+  id_keranjang        String
+  id_menu             String
+  jumlah              Int
+
+  Keranjang Keranjang @relation(fields: [id_keranjang], references: [id_keranjang], onDelete: Cascade)
+  Menu      Menu      @relation(fields: [id_menu], references: [id_menu], onDelete: Cascade)
+
+  @@unique([id_keranjang, id_menu])
+}
+
+model Pemesanan {
+  id_pemesanan       String   @id @default(cuid())
+  id_user            String
+  id_kantin          String
+  deskripsi_pemesanan String?  @db.Text
+  tanggal_pemesanan   DateTime @default(now())
+  status_pemesanan   StatusPemesanan @default(PENDING)
+  total_harga        Float
+  nomor_antrean      Int
+  metode_pembayaran  MetodePembayaran
+  status_pembayaran  StatusPembayaran @default(PENDING)
+  tanggal_pembayaran DateTime?
+
+  User    User    @relation(fields: [id_user], references: [id_user], onDelete: NoAction)
+  Kantin  Kantin  @relation(fields: [id_kantin], references: [id_kantin], onDelete: NoAction)
+  
+  DetailPemesanan DetailPemesanan[]
+  
+  @@index([id_kantin])
+  @@index([id_user])
+}
+
+model DetailPemesanan {
+  id_detail     String @id @default(cuid())
+  id_pemesanan  String
+  id_menu       String
+  jumlah_menu   Int
+  harga_satuan  Float
+
+  Pemesanan Pemesanan @relation(fields: [id_pemesanan], references: [id_pemesanan], onDelete: Cascade)
+  Menu      Menu      @relation(fields: [id_menu], references: [id_menu], onDelete: NoAction)
+}
+
+model Notifikasi {
+  id_notifikasi String   @id @default(cuid())
+  id_akun_tujuan  String
+  
+  tipe_notifikasi TipeNotifikasi
+  isi_pesan       String @db.Text
+  link_tujuan     String?
+  status_baca     Boolean  @default(false)
+  waktu_kirim     DateTime @default(now())
+
+  Akun Akun @relation(fields: [id_akun_tujuan], references: [id_akun], onDelete: Cascade)
+  
+  @@index([id_akun_tujuan])
 }
