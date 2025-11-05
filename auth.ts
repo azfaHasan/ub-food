@@ -97,6 +97,7 @@ export const authConfig: NextAuthConfig = {
         session.user.role = token.role;
         session.user.name = token.name || session.user.name;
         session.user.email = token.email || session.user.email;
+        session.user.akunId = token.accountId as string;
       }
 
       if (token.role === Role.USER && token.userId) {
