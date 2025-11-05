@@ -302,7 +302,7 @@ export default async function AdminDetailKantinPage({
                   {daftarMenu.length} menu tersedia
                 </p>
               </div>
-              <Link 
+              {/* <Link 
                 href={`${baseUrl}/add-menu`}
                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 font-medium shadow-sm hover:shadow-md whitespace-nowrap group"
               >
@@ -310,7 +310,7 @@ export default async function AdminDetailKantinPage({
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                 </svg>
                 <span>Tambah Menu Baru</span>
-              </Link>
+              </Link> */}
             </div>
           </div>
 
