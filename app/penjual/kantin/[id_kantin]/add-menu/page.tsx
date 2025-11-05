@@ -47,20 +47,20 @@ export default function TambahMenuPage() {
 
       setSuccess('Menu berhasil ditambahkan!');
       setTimeout(() => {
-          router.push(`/penjual/kantin/${id_kantin}`); 
+        router.push(`/penjual/kantin/${id_kantin}`);
       }, 2000)
 
     } catch (error) {
-        if (error instanceof Error) {
-            setError(error.message);
-        }
-        else {
-            setError("An unknown error occurred");
-        }
+      if (error instanceof Error) {
+        setError(error.message);
+      }
+      else {
+        setError("An unknown error occurred");
+      }
     } finally {
-        if (error) {
-            setIsLoading(false);
-        }
+      if (error) {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -119,10 +119,10 @@ export default function TambahMenuPage() {
             />
           </label>
         </div>
-        
+
         {error && <p style={{ color: 'red' }}>{error}</p>}
         {success && <p style={{ color: 'green' }}>{success}</p>}
-        
+
         <button type="submit" disabled={isLoading} style={{ padding: '10px 20px' }}>
           {isLoading ? 'Menyimpan...' : 'Simpan Menu'}
         </button>
