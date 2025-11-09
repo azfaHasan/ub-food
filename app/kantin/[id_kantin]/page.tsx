@@ -6,18 +6,20 @@ import { formatJam } from "@/lib/utils";
 import MenuUserCard from "@/components/MenuUserCard";
 
 interface DetailKantinUserPageProps {
-  params: {
+  params: Promise<{
     id_kantin: string;
-  };
+  }>;
 }
 
 export default async function DetailKantinUserPage({
   params,
 }: DetailKantinUserPageProps) {
+
+  const paramsNew = await params;
   
   const kantin = await prisma.kantin.findFirst({
     where: {
-      id_kantin: params.id_kantin,
+      id_kantin: paramsNew.id_kantin,
     },
     include: {
       Penjual: {
@@ -32,7 +34,7 @@ export default async function DetailKantinUserPage({
 
   const daftarMenu = await prisma.menu.findMany({
     where: {
-      id_kantin: params.id_kantin,
+      id_kantin: paramsNew.id_kantin,
     },
     orderBy: {
       nama_menu: 'asc' 

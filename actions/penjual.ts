@@ -60,13 +60,13 @@ export async function prosesPesanan(id_pemesanan: string) {
           id_akun_tujuan: pemesanan.User.Akun.id_akun,
           tipe_notifikasi: TipeNotifikasi.STATUS_UPDATE,
           isi_pesan: `Pesanan Anda #${id_pemesanan.substring(0, 5)} di ${pemesanan.Kantin.nama_kantin} sedang diproses.`,
-          link_tujuan: `/user/pesanan/${id_pemesanan}`
+          link_tujuan: `/user/riwayat/${id_pemesanan}`
         }
       })
     ]);
     
-    revalidatePath('/penjual/pesanan');
-    revalidatePath(`/user/pesanan/${id_pemesanan}`);
+    revalidatePath(`/penjual/kantin/${pemesanan.id_kantin}/orders`);
+    revalidatePath(`/user/riwayat/${id_pemesanan}`);
     
     return { success: 'Pesanan berhasil diproses.' };
   } catch (error) {
@@ -97,13 +97,13 @@ export async function siapkanPesanan(id_pemesanan: string) {
           id_akun_tujuan: pemesanan.User.Akun.id_akun,
           tipe_notifikasi: TipeNotifikasi.STATUS_UPDATE,
           isi_pesan: `Pesanan Anda #${id_pemesanan.substring(0, 5)} di ${pemesanan.Kantin.nama_kantin} sudah siap diambil.`,
-          link_tujuan: `/user/pesanan/${id_pemesanan}`
+          link_tujuan: `/user/riwayat/${id_pemesanan}`
         }
       })
     ]);
     
-    revalidatePath('/penjual/pesanan');
-    revalidatePath(`/user/pesanan/${id_pemesanan}`);
+    revalidatePath(`/penjual/kantin/${pemesanan.id_kantin}/orders`);
+    revalidatePath(`/user/riwayat/${id_pemesanan}`);
     
     return { success: 'Pesanan ditandai siap diambil.' };
   } catch (error) {
@@ -147,13 +147,13 @@ export async function selesaikanPesanan(id_pemesanan: string) {
           id_akun_tujuan: pemesanan.User.Akun.id_akun,
           tipe_notifikasi: TipeNotifikasi.STATUS_UPDATE,
           isi_pesan: `Pesanan Anda #${id_pemesanan.substring(0, 5)} telah selesai. Terima kasih!`,
-          link_tujuan: `/user/pesanan/${id_pemesanan}`
+          link_tujuan: `/user/riwayat/${id_pemesanan}`
         }
       })
     ]);
     
-    revalidatePath('/penjual/pesanan');
-    revalidatePath(`/user/pesanan/${id_pemesanan}`);
+    revalidatePath(`/penjual/kantin/${pemesanan.id_kantin}/orders`);
+    revalidatePath(`/user/riwayat/${id_pemesanan}`);
     
     return { success: 'Pesanan telah diselesaikan.' };
   } catch (error) {
@@ -161,7 +161,10 @@ export async function selesaikanPesanan(id_pemesanan: string) {
   }
 }
 
-export async function batalkanPesanan(formData: FormData) {
+export async function batalkanPesanan(
+  prevState: { error: string },
+  formData: FormData
+) {
   const session = await auth();
   if (session?.user?.role !== Role.PENJUAL || !session.user.akunId) {
     return { error: 'Anda tidak memiliki hak akses sebagai penjual.' };
@@ -177,7 +180,9 @@ export async function batalkanPesanan(formData: FormData) {
   try {
     const pemesanan = await getPemesananValid(id_pemesanan, session.user.akunId);
 
-    if (pemesanan.status_pemesanan === StatusPemesanan.SELESAI || pemesanan.status_pemesanan === StatusPemesanan.DIBATALKAN) {
+    if (pemesanan.status_pemesanan === StatusPemesanan.SELESAI || 
+        pemesanan.status_pemesanan === StatusPemesanan.DIBATALKAN) 
+    {
       return { error: 'Pesanan ini sudah selesai atau sudah dibatalkan.' };
     }
     
@@ -192,7 +197,7 @@ export async function batalkanPesanan(formData: FormData) {
           id_akun_tujuan: pemesanan.User.Akun.id_akun,
           tipe_notifikasi: TipeNotifikasi.STATUS_UPDATE,
           isi_pesan: `Maaf, pesanan Anda #${id_pemesanan.substring(0, 5)} dibatalkan. Alasan: ${alasan}`,
-          link_tujuan: `/user/pesanan/${id_pemesanan}`
+          link_tujuan: `/user/riwayat/${id_pemesanan}` // Path riwayat baru
         }
       });
 
@@ -205,13 +210,13 @@ export async function batalkanPesanan(formData: FormData) {
             }
           }
         });
-      }      
+      }
     });
     
-    revalidatePath('/penjual/pesanan');
-    revalidatePath(`/user/pesanan/${id_pemesanan}`);
+    revalidatePath(`/penjual/kantin/${pemesanan.id_kantin}/orders`);
+    revalidatePath(`/user/riwayat/${id_pemesanan}`);
     
-    return { success: 'Pesanan telah dibatalkan dan stok dikembalikan.' };
+    return { error: '' };
   } catch (error) {
     return { error: (error as Error).message };
   }

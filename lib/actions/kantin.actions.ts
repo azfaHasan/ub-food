@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
+import { Role } from "@prisma/client";
 
 export type FormState = {
   error: string | null;
@@ -74,4 +75,55 @@ export async function updateKantinProfile(
   revalidatePath(`/penjual/kantin/${kantinId}/profile`);
   
   redirect(`/penjual/kantin/${kantinId}`); 
+}
+
+export async function adminUpdateKantinProfile(
+  kantinId: string,
+  prevState: FormState,
+  formData: FormData
+): Promise<FormState> {
+  
+  const session = await auth();
+  if (!session?.user?.id || session.user.role !== Role.ADMIN) {
+    return { error: "Akses ditolak. Hanya admin yang bisa mengubah data.", success: false };
+  }
+
+  const deskripsi = formData.get("deskripsi_kantin") as string;
+  const jamBukaString = formData.get("jam_buka") as string | null;
+  const jamTutupString = formData.get("jam_tutup") as string | null;
+  
+  const jam_buka = convertTimeToDate(jamBukaString);
+  const jam_tutup = convertTimeToDate(jamTutupString);
+
+  try {
+    const kantin = await prisma.kantin.findFirst({
+      where: {
+        id_kantin: kantinId,
+      }
+    });
+
+    if (!kantin) {
+      return { error: "Kantin tidak ditemukan.", success: false };
+    }
+
+    await prisma.kantin.update({
+      where: { 
+        id_kantin: kantinId 
+      }, 
+      data: {
+        deskripsi_kantin: deskripsi,
+        jam_buka: jam_buka,
+        jam_tutup: jam_tutup,
+      },
+    });
+
+  } catch (error) {
+    console.error("Gagal update profil kantin (Admin):", error);
+    return { error: "Gagal menyimpan data ke database.", success: false };
+  }
+
+  revalidatePath(`/admin/kantin/${kantinId}`);
+  revalidatePath(`/admin/kantin/${kantinId}/profile`);
+  
+  redirect(`/admin/kantin/${kantinId}`); 
 }

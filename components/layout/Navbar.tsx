@@ -8,22 +8,90 @@ import { NAV_LINKS } from "@/lib/nav.config";
 import LogoutButton from "@/components/LogoutButton";
 import { useSession } from "next-auth/react";
 
+function LoggedInNav({ role, avatarUrl }: { role: Role; avatarUrl?: string | null }) {
+  const pathname = usePathname();
+  const items = NAV_LINKS[role as Role] || [];
+
+  return (
+    <div className="flex items-center" style={{ columnGap: 60 }}>
+      {items.map(({ label, href }) => {
+        if (href === "/logout") {
+          return (
+            <div key={href}>
+              <LogoutButton />
+            </div>
+          );
+        }
+        const active = (href !== '/logout' && pathname.startsWith(href));
+        return (
+          <Link
+            key={href}
+            href={href}
+            className="text-white/95 hover:text-white transition-colors"
+            style={{
+              fontSize: 16,
+              lineHeight: "28px",
+              fontWeight: 600,
+              opacity: active ? 1 : 0.95,
+            }}
+            aria-current={active ? "page" : undefined}
+          >
+            {label}
+          </Link>
+        );
+      })}
+      <Image
+        src={avatarUrl ?? "/assets/nav/avatar-default.jpg"}
+        alt="Profile"
+        width={28}
+        height={28}
+        className="rounded-full ring-2 ring-white/60"
+      />
+    </div>
+  );
+}
+
+function LoggedOutNav() {
+  return (
+    <div className="flex items-center">
+      <Link
+        href="/login"
+        className="text-white/95 hover:text-white transition-colors"
+        style={{
+        fontSize: 16,
+        lineHeight: "28px",
+        fontWeight: 600,
+        opacity: 0.95,
+        background: 'none',
+        border: 'none',
+        cursor: 'pointer'
+      }}
+      >
+        Login
+      </Link>
+    </div>
+  );
+}
+
 export default function Navbar() {
 
-  const pathname = usePathname();
   const { data: session, status } = useSession();
+  const pathname = usePathname();
   const role = session?.user?.role;
   const avatarUrl = session?.user?.image;
 
+  let navContent = null;
+
   if (status === "loading") {
+    navContent = null;
+  } else if (session && role) {
+    navContent = <LoggedInNav role={role} avatarUrl={avatarUrl} />;
+  } else if (!session && pathname === "/") {
+    navContent = <LoggedOutNav />;
+  }
+  if (!navContent) {
     return null;
   }
-
-  if (!session || !role) {
-    return null;
-  }
-
-  const items = NAV_LINKS[role as Role] || [];
 
   return (
     <div
@@ -50,44 +118,7 @@ export default function Navbar() {
             priority
           />
         </Link>
-
-        <div className="flex items-center" style={{ columnGap: 60 }}>
-          {items.map(({ label, href }) => {
-            if (href === "/logout") {
-              return (
-                <div key={href}>
-                  <LogoutButton />
-                </div>
-              );
-            }
-            
-            const active = (href !== '/logout' && pathname.startsWith(href));
-            
-            return (
-              <Link
-                key={href}
-                href={href}
-                className="text-white/95 hover:text-white transition-colors"
-                style={{
-                  fontSize: 16,
-                  lineHeight: "28px",
-                  fontWeight: 600,
-                  opacity: active ? 1 : 0.95,
-                }}
-                aria-current={active ? "page" : undefined}
-              >
-                {label}
-              </Link>
-            );
-          })}
-          <Image
-            src={avatarUrl ?? "/assets/nav/avatar-default.jpg"} // Pastikan ini ada di public
-            alt="Profile"
-            width={28}
-            height={28}
-            className="rounded-full ring-2 ring-white/60"
-          />
-        </div>
+        {navContent}
       </div>
     </div>
   );
