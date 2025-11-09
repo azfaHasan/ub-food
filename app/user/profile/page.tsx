@@ -87,7 +87,7 @@ export default async function UserProfilePage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-pink-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         {/* Breadcrumb Navigation */}
@@ -106,7 +106,7 @@ export default async function UserProfilePage() {
         {/* Page Header */}
         <div className="mb-8">
           <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-6">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-600 px-8 py-6">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
                   <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm shadow-lg">
@@ -136,7 +136,7 @@ export default async function UserProfilePage() {
             <div className="px-8 py-6 bg-gradient-to-r from-slate-50 to-slate-100 border-b border-slate-200">
               <div className="flex items-center gap-6">
                 <div className="relative">
-                  <div className="flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg">
+                  <div className="flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-500 shadow-lg">
                     <span className="text-3xl font-bold text-white">
                       {userWithAkun.nama_user.charAt(0).toUpperCase()}
                     </span>
@@ -211,7 +211,7 @@ export default async function UserProfilePage() {
         </div>
 
         {/* Account Security Section */}
-        <div className="mt-6 bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+        {/* <div className="mt-6 bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
           <div className="px-8 py-6 border-b border-slate-200 bg-gradient-to-r from-slate-50 to-slate-100">
             <div className="flex items-center gap-3">
               <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-white shadow-sm">
@@ -269,7 +269,7 @@ export default async function UserProfilePage() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Quick Actions Footer */}
         <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-6 bg-white rounded-2xl shadow-sm border border-slate-200">
@@ -294,12 +294,12 @@ export default async function UserProfilePage() {
               </svg>
               <span>Kembali</span>
             </Link>
-            <button className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-colors font-medium text-sm shadow-sm hover:shadow-md">
+            {/* <button className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-colors font-medium text-sm shadow-sm hover:shadow-md">
               <span>Bantuan</span>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
