@@ -1,58 +1,3 @@
-// import { auth } from "@/auth";
-// import { redirect, notFound } from "next/navigation";
-// import { prisma } from "@/lib/prisma";
-// import { Role } from "@prisma/client";
-// import { updateMenu, type FormState } from "@/lib/actions/menu.actions"; 
-// import MenuEditForm from "@/components/MenuEditForm"; 
-
-// interface EditMenuPageProps {
-//   params: {
-//     id_kantin: string;
-//     id_menu: string;
-//   };
-// }
-
-// export default async function AdminEditMenuPage({ params }: EditMenuPageProps) {
-//   const session = await auth();
-  
-//   if (!session?.user?.id || session.user.role !== Role.ADMIN) {
-//     redirect("/login"); 
-//   }
-
-//   const menu = await prisma.menu.findUnique({
-//     where: { 
-//       id_menu: params.id_menu,
-//       id_kantin: params.id_kantin,
-//     },
-//   });
-
-//   if (!menu) {
-//     notFound(); 
-//   }
-  
-//   const updateMenuWithIds = updateMenu.bind(
-//     null,
-//     menu.id_menu,
-//     menu.id_kantin
-//   );
-
-//   return (
-//     <div className="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-//       <h1 className="text-2xl font-bold mb-6">[ADMIN] Edit Menu: {menu.nama_menu}</h1>
-//       <MenuEditForm
-//         menu={menu} 
-//         updateMenuAction={
-//           updateMenuWithIds as (
-//             prevState: FormState,
-//             formData: FormData
-//           ) => Promise<FormState>
-//         }
-//       />
-//     </div>
-//   );
-// }
-
-
 import { auth } from "@/auth";
 import { redirect, notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
@@ -62,10 +7,10 @@ import MenuEditForm from "@/components/MenuEditForm";
 import Link from "next/link";
 
 interface EditMenuPageProps {
-  params: {
+  params: Promise<{
     id_kantin: string;
     id_menu: string;
-  };
+  }>;
 }
 
 export default async function AdminEditMenuPage({ params }: EditMenuPageProps) {
@@ -75,10 +20,12 @@ export default async function AdminEditMenuPage({ params }: EditMenuPageProps) {
     redirect("/login"); 
   }
 
+  const paramsNew = await params;
+
   const menu = await prisma.menu.findUnique({
     where: { 
-      id_menu: params.id_menu,
-      id_kantin: params.id_kantin,
+      id_menu: paramsNew.id_menu,
+      id_kantin: paramsNew.id_kantin,
     },
   });
 
@@ -106,7 +53,7 @@ export default async function AdminEditMenuPage({ params }: EditMenuPageProps) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
             <Link 
-              href={`/admin/kantin/${params.id_kantin}`} 
+              href={`/admin/kantin/${paramsNew.id_kantin}`} 
               className="text-slate-600 hover:text-blue-600 transition-colors font-medium"
             >
               Detail Kantin
@@ -206,7 +153,7 @@ export default async function AdminEditMenuPage({ params }: EditMenuPageProps) {
             </div> */}
           </div>
           <Link
-            href={`/admin/kantin/${params.id_kantin}`}
+            href={`/admin/kantin/${paramsNew.id_kantin}`}
             className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-700 rounded-xl hover:bg-slate-200 transition-colors font-medium text-sm"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

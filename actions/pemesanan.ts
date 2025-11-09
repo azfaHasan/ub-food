@@ -2,22 +2,34 @@
 
 import { prisma } from '@/lib/prisma';
 import { auth } from '@/auth';
-import { redirect } from 'next/navigation';
 import { MetodePembayaran, StatusPemesanan, StatusPembayaran, TipeNotifikasi } from '@prisma/client';
 
-export async function finalisasiPemesanan(prevState: { error: string }, formData: FormData) {
+  type FormState = {
+    error: string;
+    success: boolean;
+    id_pemesanan: string | null;
+  };
+
+export async function finalisasiPemesanan(
+    prevState: FormState, 
+    formData: FormData
+  ) {
+  
   const session = await auth();
   if (!session?.user?.id || !session.user.akunId) {
-    throw new Error('Anda harus login.');
+    return { 
+          success: false, 
+          id_pemesanan: null, 
+      error: 'Anda harus login.' 
+    };
   }
+
   const userId = session.user.id;
   const userAkunId = session.user.akunId;
   const userName = session.user.name || "User";
-
   const deskripsi = formData.get('deskripsi') as string | null;
   const metodePembayaran = formData.get('metode_pembayaran') as MetodePembayaran;
 
-  // 1. Ambil keranjang user
   const keranjang = await prisma.keranjang.findUnique({
     where: { id_user: userId },
     include: {
@@ -38,7 +50,11 @@ export async function finalisasiPemesanan(prevState: { error: string }, formData
   });
 
   if (!keranjang || keranjang.DetailKeranjang.length === 0) {
-    throw new Error('Keranjang kosong.');
+    return {  
+      success: false, 
+      id_pemesanan: null, 
+      error: 'Keranjang kosong.' 
+    };
   }
 
   const detailItems = keranjang.DetailKeranjang;
@@ -110,11 +126,17 @@ export async function finalisasiPemesanan(prevState: { error: string }, formData
 
       return pesanan;
     });
-
-    redirect(`/user/pesanan/${pemesananBaru.id_pemesanan}`);
-
+    return{
+      success: true,
+      error: '',
+      id_pemesanan: pemesananBaru.id_pemesanan
+    }
   } catch (error) {
     console.error(error);
-    return { error: (error as Error).message };
+    return { 
+      success: false, 
+      id_pemesanan: null, 
+      error: (error as Error).message 
+    };
   }
 }

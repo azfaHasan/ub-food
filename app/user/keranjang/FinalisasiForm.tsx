@@ -1,17 +1,34 @@
 'use client';
 
-import { useFormState } from 'react-dom';
 import { finalisasiPemesanan } from '@/actions/pemesanan';
 import { MetodePembayaran } from '@prisma/client';
 import SubmitButton from '@/components/SubmitButton';
+import { useActionState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-const initialState = {
+type FormState = {
+  error: string;
+  success: boolean;
+  id_pemesanan: string | null;
+};
+
+const initialState: FormState = {
   error: '',
+  success: false,
+  id_pemesanan: null,
 };
 
 export default function FinalisasiForm() {
 
-  const [state, formAction] = useFormState(finalisasiPemesanan, initialState);
+  const router = useRouter();
+  const [state, formAction] = useActionState(finalisasiPemesanan, initialState);
+
+  useEffect(() => {
+    if (state.success && state.id_pemesanan) {
+      alert('Pemesanan berhasil dibuat!');
+      router.push(`/user/riwayat/${state.id_pemesanan}`);
+    }
+  }, [state, router]);
 
   return (
     <form action={formAction} className="p-6 space-y-4">
