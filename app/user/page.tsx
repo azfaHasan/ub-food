@@ -26,13 +26,13 @@ export default async function UserPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-pink-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         {/* Welcome Header */}
         <div className="mb-8">
           <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-8">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-600 px-8 py-8">
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
                 {/* Avatar */}
                 <div className="flex-shrink-0">
@@ -97,7 +97,7 @@ export default async function UserPage() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-6">
+        <div className="grid lg:grid-cols-1 gap-6">
           {/* Profile Information */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
@@ -116,7 +116,7 @@ export default async function UserPage() {
                   </div>
                   <Link 
                     href="/user/profile" 
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-colors font-medium text-sm shadow-sm hover:shadow-md group"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-medium text-sm shadow-sm hover:shadow-md group"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -130,10 +130,10 @@ export default async function UserPage() {
                 <div className="space-y-6">
                   {/* Full Name */}
                   <div className="group">
-                    <div className="flex items-start gap-4 p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 group-hover:border-purple-300 transition-colors">
+                    <div className="flex items-start gap-4 p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 group-hover:border-blue-300 transition-colors">
                       <div className="flex-shrink-0">
                         <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white shadow-sm">
-                          <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                           </svg>
                         </div>
@@ -147,7 +147,7 @@ export default async function UserPage() {
 
                   {/* Username */}
                   <div className="group">
-                    <div className="flex items-start gap-4 p-5 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 group-hover:border-blue-400 transition-colors">
+                    <div className="flex items-start gap-4 p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-50 border border-slate-200 group-hover:border-blue-400 transition-colors">
                       <div className="flex-shrink-0">
                         <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white shadow-sm">
                           <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -164,7 +164,7 @@ export default async function UserPage() {
 
                   {/* Email */}
                   <div className="group">
-                    <div className="flex items-start gap-4 p-5 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 group-hover:border-green-400 transition-colors">
+                    <div className="flex items-start gap-4 p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-50 border border-slate-200 group-hover:border-blue-400 transition-colors">
                       <div className="flex-shrink-0">
                         <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white shadow-sm">
                           <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -181,7 +181,7 @@ export default async function UserPage() {
 
                   {/* Phone Number */}
                   <div className="group">
-                    <div className="flex items-start gap-4 p-5 rounded-2xl bg-gradient-to-br from-orange-50 to-red-50 border border-orange-200 group-hover:border-orange-400 transition-colors">
+                    <div className="flex items-start gap-4 p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-50 border border-slate-200 group-hover:border--400 transition-colors">
                       <div className="flex-shrink-0">
                         <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white shadow-sm">
                           <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,9 +208,9 @@ export default async function UserPage() {
           </div>
 
           {/* Quick Actions Sidebar */}
-          <div className="space-y-6">
+          {/* <div className="space-y-6"> */}
             {/* Account Settings */}
-            <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+            {/* <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
               <div className="px-6 py-5 border-b border-slate-200 bg-gradient-to-r from-slate-50 to-slate-100">
                 <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                   <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -222,11 +222,11 @@ export default async function UserPage() {
               </div>
               <div className="p-4">
                 <nav className="space-y-2">
-                  <Link href="/user/profile" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-purple-50 transition-colors group">
-                    <svg className="w-5 h-5 text-slate-600 group-hover:text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <Link href="/user/profile" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-50 transition-colors group">
+                    <svg className="w-5 h-5 text-slate-600 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>
-                    <span className="text-sm font-medium text-slate-700 group-hover:text-purple-600">Edit Profil</span>
+                    <span className="text-sm font-medium text-slate-700 group-hover:text-blue-600">Edit Profil</span>
                   </Link>
                   <Link href="/user/password" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-50 transition-colors group">
                     <svg className="w-5 h-5 text-slate-600 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -242,10 +242,10 @@ export default async function UserPage() {
                   </Link>
                 </nav>
               </div>
-            </div>
+            </div> */}
 
             {/* Help Card */}
-            <div className="bg-gradient-to-br from-purple-500 to-pink-500 rounded-3xl shadow-lg p-6 text-white">
+            {/* <div className="bg-gradient-to-br from-purple-500 to-pink-500 rounded-3xl shadow-lg p-6 text-white">
               <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm mb-4">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -256,8 +256,8 @@ export default async function UserPage() {
               <button className="w-full px-4 py-2.5 bg-white text-purple-600 rounded-xl hover:bg-purple-50 transition-colors font-semibold text-sm shadow-lg">
                 Hubungi Support
               </button>
-            </div>
-          </div>
+            </div> */}
+          {/* </div> */}
         </div>
       </div>
     </div>
