@@ -11,6 +11,7 @@ import { useSession } from "next-auth/react";
 function LoggedInNav({ role, avatarUrl }: { role: Role; avatarUrl?: string | null }) {
   const pathname = usePathname();
   const items = NAV_LINKS[role as Role] || [];
+  const dashboardPath = role === Role.ADMIN ? '/admin' : role === Role.PENJUAL ? '/penjual' : '/user';
 
   return (
     <div className="flex items-center" style={{ columnGap: 60 }}>
@@ -40,6 +41,8 @@ function LoggedInNav({ role, avatarUrl }: { role: Role; avatarUrl?: string | nul
           </Link>
         );
       })}
+
+      <Link href={dashboardPath} title="Dashboard">
       <Image
         src={avatarUrl ?? "/assets/nav/avatar-default.jpg"}
         alt="Profile"
@@ -47,6 +50,7 @@ function LoggedInNav({ role, avatarUrl }: { role: Role; avatarUrl?: string | nul
         height={28}
         className="rounded-full ring-2 ring-white/60"
       />
+      </Link>
     </div>
   );
 }

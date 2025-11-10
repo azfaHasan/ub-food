@@ -10,8 +10,8 @@ export const dynamic = 'force-dynamic';
 export default async function NotifikasiPage() {
   const session = await auth();
 
-  if (!session?.user?.akunId || session.user.role !== Role.USER) {
-    redirect("/login/user");
+  if (!session?.user?.akunId || session.user.role !== Role.PENJUAL) {
+    redirect("/login/penjual");
   }
 
   const daftarNotifikasi = await prisma.notifikasi.findMany({
@@ -28,7 +28,7 @@ export default async function NotifikasiPage() {
   return (
     <div className="max-w-3xl mx-auto p-4 sm:p-6 lg:p-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Notifikasi Anda</h1>
+        <h1 className="text-3xl font-bold">Notifikasi Penjual</h1>
         {adaYangBelumDibaca && (
           <TandaiSemuaDibacaButton />
         )}
@@ -37,7 +37,7 @@ export default async function NotifikasiPage() {
       <div className="bg-white shadow-md rounded-lg">
         {daftarNotifikasi.length === 0 ? (
           <p className="text-gray-500 p-6 text-center">
-            Anda belum memiliki notifikasi.
+            Belum memiliki notifikasi dari kantin anda.
           </p>
         ) : (
           <ul className="divide-y divide-gray-200">

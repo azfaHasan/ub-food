@@ -8,7 +8,10 @@ export default function TandaiSemuaDibacaButton() {
 
   const handleClick = () => {
     startTransition(async () => {
-      await tandaiSemuaDibaca();
+      const result = await tandaiSemuaDibaca();
+      if (result?.error) {
+        alert(result.error);
+      }
     });
   };
 
