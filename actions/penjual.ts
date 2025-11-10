@@ -132,7 +132,7 @@ export async function selesaikanPesanan(id_pemesanan: string) {
       status_pemesanan: StatusPemesanan.SELESAI
     };
     
-    if (pemesanan.metode_pembayaran === 'TUNAI') {
+    if (pemesanan.metode_pembayaran === 'TUNAI' || pemesanan.metode_pembayaran === 'QRIS') {
       dataUpdate.status_pembayaran = StatusPembayaran.LUNAS;
       dataUpdate.tanggal_pembayaran = new Date();
     }
