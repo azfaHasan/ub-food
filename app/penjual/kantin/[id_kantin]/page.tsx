@@ -178,13 +178,13 @@ export default async function DetailKantinPage({
   const baseUrl = `/penjual/kantin/${params.id_kantin}`;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-emerald-50 to-teal-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-50 to-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         {/* Breadcrumb Navigation */}
         <div className="mb-6">
           <nav className="flex items-center gap-2 text-sm">
-            <Link href="/penjual" className="text-slate-600 hover:text-emerald-600 transition-colors font-medium">
+            <Link href="/penjual" className="text-slate-600 hover:text-blue-600 transition-colors font-medium">
               Dashboard
             </Link>
             <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -198,7 +198,7 @@ export default async function DetailKantinPage({
         <div className="mb-8">
           <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
             {/* Header with gradient */}
-            <div className="bg-gradient-to-r from-emerald-600 to-teal-600 px-8 py-6">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-600 px-8 py-6">
               <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                 <div className="flex items-start gap-4 flex-1">
                   <div className="flex-shrink-0">
@@ -232,7 +232,7 @@ export default async function DetailKantinPage({
                 
                 <Link
                   href={`/penjual/kantin/${kantin.id_kantin}/profile`}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-emerald-600 rounded-xl hover:bg-emerald-50 transition-all duration-200 font-medium shadow-sm hover:shadow-md whitespace-nowrap group"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-blue-600 rounded-xl hover:bg-blue-50 transition-all duration-200 font-medium shadow-sm hover:shadow-md whitespace-nowrap group"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -289,7 +289,7 @@ export default async function DetailKantinPage({
                 <div className="text-xs text-slate-600 font-medium">Pesanan Hari Ini</div>
               </div>
               <div className="px-6 py-4 text-center">
-                <div className="text-2xl font-bold text-emerald-600 mb-1">4.5★</div>
+                <div className="text-2xl font-bold text-blue-600 mb-1">4.5★</div>
                 <div className="text-xs text-slate-600 font-medium">Rating</div>
               </div>
             </div>
@@ -315,7 +315,7 @@ export default async function DetailKantinPage({
               </div>
               <Link 
                 href={`${baseUrl}/add-menu`}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-all duration-200 font-medium shadow-sm hover:shadow-md whitespace-nowrap group"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 font-medium shadow-sm hover:shadow-md whitespace-nowrap group"
               >
                 <svg className="w-5 h-5 group-hover:rotate-90 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -339,7 +339,7 @@ export default async function DetailKantinPage({
                 </p>
                 <Link 
                   href={`${baseUrl}/add-menu`}
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-colors font-medium shadow-sm"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-medium shadow-sm"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
