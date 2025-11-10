@@ -112,7 +112,7 @@ export async function finalisasiPemesanan(
           id_akun_tujuan: akunPenjualId,
           tipe_notifikasi: TipeNotifikasi.PESANAN_BARU,
           isi_pesan: `Pesanan baru #${pesanan.id_pemesanan.substring(0, 5)} dari ${userName}.`,
-          link_tujuan: `/penjual/pesanan/${pesanan.id_pemesanan}`,
+          link_tujuan: `/penjual/riwayat/${pesanan.id_pemesanan}`,
         }
       });
       await tx.notifikasi.create({
@@ -120,7 +120,7 @@ export async function finalisasiPemesanan(
           id_akun_tujuan: userAkunId,
           tipe_notifikasi: TipeNotifikasi.STATUS_UPDATE,
           isi_pesan: `Pesanan Anda #${pesanan.id_pemesanan.substring(0, 5)} di ${kantinInfo.nama_kantin} sedang menunggu konfirmasi.`,
-          link_tujuan: `/user/pesanan/${pesanan.id_pemesanan}`,
+          link_tujuan: `/user/riwayat/${pesanan.id_pemesanan}`,
         }
       });
 

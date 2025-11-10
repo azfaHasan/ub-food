@@ -57,9 +57,11 @@ export default function LoginPage() {
     if (result?.error) {
       setLoading(false);
       setError("Email atau password salah, atau role tidak sesuai.");
+    } else if (result?.ok || role == 'user') {
+      router.push(`/`);
     } else if (result?.ok) {
       router.push(`/${role}`);
-    }
+    } 
   };
 
   if (loading) {

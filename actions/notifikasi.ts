@@ -30,6 +30,8 @@ export async function tandaiSudahDibaca(id_notifikasi: string) {
     }
 
     revalidatePath('/user/notifikasi');
+    revalidatePath('/penjual/notifikasi');
+    
     return { success: true, link: notif.link_tujuan };
 
   } catch (error) {
@@ -53,6 +55,7 @@ export async function tandaiSemuaDibaca() {
     });
     
     revalidatePath('/user/notifikasi');
+    revalidatePath('/penjual/notifikasi');
     return { success: true };
 
   } catch (error) {
