@@ -245,7 +245,7 @@ export default async function DetailKantinPage({
         </div>
 
         {/* Quick Actions */}
-        <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Link 
             href={`${baseUrl}/orders`}
             className="group p-6 bg-white rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all"
@@ -326,7 +326,7 @@ export default async function DetailKantinPage({
               </svg>
             </div>
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );
