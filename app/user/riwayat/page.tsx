@@ -182,13 +182,13 @@ function OrderCard({ pesanan }: { pesanan: PesananWithKantin }) {
   return (
     <Link 
       href={`/user/riwayat/${pesanan.id_pemesanan}`}
-      className="group block bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg hover:border-purple-300 transition-all duration-300 overflow-hidden"
+      className="group block bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg hover:border-blue-300 transition-all duration-300 overflow-hidden"
     >
       <div className="p-6">
         <div className="flex items-start justify-between gap-4 mb-4">
           <div className="flex items-start gap-4 flex-1">
             <div className="flex-shrink-0">
-              <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-md">
+              <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-500 shadow-md">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
@@ -196,7 +196,7 @@ function OrderCard({ pesanan }: { pesanan: PesananWithKantin }) {
             </div>
             
             <div className="flex-1 min-w-0">
-              <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-purple-600 transition-colors">
+              <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-blue-600 transition-colors">
                 {pesanan.Kantin.nama_kantin}
               </h3>
               <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
@@ -236,7 +236,7 @@ function OrderCard({ pesanan }: { pesanan: PesananWithKantin }) {
         
         <div className="flex items-center justify-between pt-4 border-t border-slate-100">
           <span className="text-sm font-medium text-slate-600">Total Pembayaran</span>
-          <span className="text-2xl font-bold text-purple-600">
+          <span className="text-2xl font-bold text-emerald-600">
             {formatRupiah(pesanan.total_harga)}
           </span>
         </div>
@@ -279,7 +279,7 @@ export default async function RiwayatPesananPage() {
         {/* Header Section */}
         <div className="mb-8">
           <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-6">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-600 px-8 py-6">
               <div className="flex items-center gap-4">
                 <div className="flex-shrink-0">
                   <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm shadow-lg">
@@ -333,10 +333,10 @@ export default async function RiwayatPesananPage() {
         {/* Filter Section */}
         <div className="mb-6 flex flex-wrap items-center gap-3">
           <span className="text-sm font-medium text-slate-700">Filter:</span>
-          <button className="px-4 py-2 bg-purple-600 text-white rounded-xl text-sm font-medium shadow-sm hover:bg-purple-700 transition-colors">
+          <button className="px-4 py-2 bg-blue-600 text-white rounded-xl text-sm font-medium shadow-sm hover:bg-blue-700 transition-colors">
             Semua
           </button>
-          <button className="px-4 py-2 bg-white text-slate-700 rounded-xl text-sm font-medium border border-slate-200 hover:bg-slate-50 transition-colors">
+          {/* <button className="px-4 py-2 bg-white text-slate-700 rounded-xl text-sm font-medium border border-slate-200 hover:bg-slate-50 transition-colors">
             Pending
           </button>
           <button className="px-4 py-2 bg-white text-slate-700 rounded-xl text-sm font-medium border border-slate-200 hover:bg-slate-50 transition-colors">
@@ -344,7 +344,7 @@ export default async function RiwayatPesananPage() {
           </button>
           <button className="px-4 py-2 bg-white text-slate-700 rounded-xl text-sm font-medium border border-slate-200 hover:bg-slate-50 transition-colors">
             Selesai
-          </button>
+          </button> */}
         </div>
 
         {/* Orders List */}
@@ -381,7 +381,7 @@ export default async function RiwayatPesananPage() {
 
         {/* Summary Card - Only show if there are orders */}
         {daftarPesanan.length > 0 && (
-          <div className="mt-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-3xl shadow-lg p-6 text-white">
+          <div className="mt-8 bg-gradient-to-br from-blue-500 to-blue-500 rounded-3xl shadow-lg p-6 text-white">
             <div className="flex items-center gap-4 mb-4">
               <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -390,7 +390,7 @@ export default async function RiwayatPesananPage() {
               </div>
               <div>
                 <h3 className="text-lg font-bold">Total Pengeluaran</h3>
-                <p className="text-purple-100 text-sm">Dari semua pesanan Anda</p>
+                <p className="text-blue-100 text-sm">Dari semua pesanan Anda</p>
               </div>
             </div>
             <p className="text-3xl font-bold">
