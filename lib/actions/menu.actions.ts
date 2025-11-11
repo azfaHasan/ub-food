@@ -2,17 +2,15 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { prisma } from "@/lib/prisma"; // Pastikan path prisma benar
-import { auth } from "@/auth"; // Pastikan path auth benar
+import { prisma } from "@/lib/prisma";
+import { auth } from "@/auth";
 import { Role } from "@prisma/client";
 
-// Tipe ini sudah benar
 export type FormState = {
   error: string | null;
   success: boolean;
 };
 
-// Fungsi ini sudah benar
 async function canModifyMenu(kantinId: string) {
   const session = await auth();
   if (!session) return false;
@@ -68,7 +66,6 @@ export async function updateMenu(
     await prisma.menu.update({
       where: {
         id_menu: menuId,
-        // PERBAIKAN: Tambahkan cek id_kantin untuk keamanan
         id_kantin: kantinId,
       },
       data: {
@@ -86,26 +83,23 @@ export async function updateMenu(
   revalidatePath(`/penjual/kantin/${kantinId}`);
   revalidatePath(`/admin/kantin/${kantinId}`);
 
-  // Pola redirect ini sudah benar dan akan menghentikan eksekusi
   const session = await auth();
   if (session?.user.role === Role.ADMIN) {
     redirect(`/admin/kantin/${kantinId}`);
   } else {
     redirect(`/penjual/kantin/${kantinId}`);
   }
-  // Catatan: redirect() akan 'throw' error, jadi tidak perlu 'return' di sini.
 }
 
 export async function deleteMenu(
   menuId: string,
   kantinId: string
-): Promise<FormState> { // PERBAIKAN: Tambahkan tipe kembalian Promise<FormState>
+): Promise<FormState> {
   "use server";
 
   const hasAccess = await canModifyMenu(kantinId);
   if (!hasAccess) {
     console.error("Akses ditolak: Gagal menghapus menu.");
-    // PERBAIKAN: Kembalikan objek FormState saat error
     return {
       success: false,
       error: "Akses ditolak. Anda tidak berhak menghapus menu ini.",
@@ -116,13 +110,11 @@ export async function deleteMenu(
     await prisma.menu.delete({
       where: {
         id_menu: menuId,
-        // PERBAIKAN: Tambahkan cek id_kantin untuk keamanan
         id_kantin: kantinId,
       },
     });
   } catch (error) {
     console.error("Gagal menghapus menu:", error);
-    // PERBAIKAN: Kembalikan objek FormState saat error
     return {
       success: false,
       error: "Terjadi kesalahan database saat menghapus menu.",
@@ -132,6 +124,5 @@ export async function deleteMenu(
   revalidatePath(`/penjual/kantin/${kantinId}`);
   revalidatePath(`/admin/kantin/${kantinId}`);
 
-  // PERBAIKAN: Kembalikan objek FormState saat sukses
   return { success: true, error: null };
 }
