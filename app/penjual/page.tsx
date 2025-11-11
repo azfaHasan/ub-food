@@ -148,7 +148,7 @@ export default async function PenjualDashboardPage() {
                 {/* Seller Info */}
                 <div className="flex-1 min-w-0">
                   <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">
-                    Selamat datang, Penjual! 🏪
+                    Selamat datang, Penjual! 
                   </h1>
                   <p className="text-xl font-semibold text-white/90 mb-3">
                     {penjualData.nama_penjual}

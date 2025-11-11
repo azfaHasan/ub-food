@@ -53,7 +53,7 @@ export default async function UserPage() {
                 {/* User Info */}
                 <div className="flex-1 min-w-0">
                   <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">
-                    Selamat datang! 👋
+                    Selamat datang! 
                   </h1>
                   <p className="text-xl font-semibold text-white/90 mb-3">
                     {userData.nama_user}
