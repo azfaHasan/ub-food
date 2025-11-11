@@ -161,7 +161,7 @@ export default async function PenjualDashboardPage() {
                       @{penjualData.Akun.username}
                     </span>
                     <span className="px-3 py-1 text-sm font-medium bg-white/20 backdrop-blur-sm text-white rounded-full">
-                      🏪 Penjual
+                      Penjual
                     </span>
                     <span className="px-3 py-1 text-sm font-medium bg-blue-400/30 backdrop-blur-sm text-white rounded-full">
                       {daftarKantin.length} Kantin
@@ -232,26 +232,6 @@ export default async function PenjualDashboardPage() {
                     </p>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Quick Stats */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-slate-200 bg-slate-50">
-              <div className="px-6 py-4 text-center">
-                <div className="text-2xl font-bold text-slate-900 mb-1">0</div>
-                <div className="text-xs text-slate-600 font-medium">Menu Aktif</div>
-              </div>
-              <div className="px-6 py-4 text-center">
-                <div className="text-2xl font-bold text-slate-900 mb-1">0</div>
-                <div className="text-xs text-slate-600 font-medium">Pesanan</div>
-              </div>
-              <div className="px-6 py-4 text-center">
-                <div className="text-2xl font-bold text-slate-900 mb-1">0</div>
-                <div className="text-xs text-slate-600 font-medium">Review</div>
-              </div>
-              <div className="px-6 py-4 text-center">
-                <div className="text-2xl font-bold text-blue-600 mb-1">Rp 0</div>
-                <div className="text-xs text-slate-600 font-medium">Pendapatan</div>
               </div>
             </div>
           </div>
