@@ -179,73 +179,8 @@ export default async function DetailKantinPage({
           </div>
         </div>
 
-        {/* Menu Section */}
-        <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
-          <div className="px-8 py-6 border-b border-slate-200">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <div>
-                <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-orange-50">
-                    <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                    </svg>
-                  </div>
-                  Daftar Menu
-                </h2>
-                <p className="text-slate-600 mt-1 ml-13">
-                  {daftarMenu.length} menu tersedia
-                </p>
-              </div>
-              <Link 
-                href={`${baseUrl}/add-menu`}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 font-medium shadow-sm hover:shadow-md whitespace-nowrap group"
-              >
-                <svg className="w-5 h-5 group-hover:rotate-90 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                </svg>
-                <span>Tambah Menu Baru</span>
-              </Link>
-            </div>
-          </div>
-
-          <div className="p-8">
-            {daftarMenu.length === 0 ? (
-              <div className="text-center py-16">
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-orange-50 mb-4">
-                  <svg className="w-10 h-10 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-2">Belum Ada Menu</h3>
-                <p className="text-slate-600 mb-6 max-w-md mx-auto">
-                  Belum ada menu di kantin ini. Mulai tambahkan menu pertama untuk menarik pelanggan!
-                </p>
-                <Link 
-                  href={`${baseUrl}/add-menu`}
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-medium shadow-sm"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                  </svg>
-                  <span>Tambah Menu Pertama</span>
-                </Link>
-              </div>
-            ) : (
-              <div className="grid gap-4">
-                {daftarMenu.map((menu) => (
-                  <MenuListItem 
-                    key={menu.id_menu} 
-                    menu={menu} 
-                    baseUrl={baseUrl} 
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-
         {/* Quick Actions */}
-        <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="mt-6 mb-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Link 
             href={`${baseUrl}/orders`}
             className="group p-6 bg-white rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all"
@@ -326,6 +261,71 @@ export default async function DetailKantinPage({
               </svg>
             </div>
           </Link>
+        </div>
+
+        {/* Menu Section */}
+        <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+          <div className="px-8 py-6 border-b border-slate-200">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-orange-50">
+                    <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                  </div>
+                  Daftar Menu
+                </h2>
+                <p className="text-slate-600 mt-1 ml-13">
+                  {daftarMenu.length} menu tersedia
+                </p>
+              </div>
+              <Link 
+                href={`${baseUrl}/add-menu`}
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 font-medium shadow-sm hover:shadow-md whitespace-nowrap group"
+              >
+                <svg className="w-5 h-5 group-hover:rotate-90 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+                <span>Tambah Menu Baru</span>
+              </Link>
+            </div>
+          </div>
+
+          <div className="p-8">
+            {daftarMenu.length === 0 ? (
+              <div className="text-center py-16">
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-orange-50 mb-4">
+                  <svg className="w-10 h-10 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-slate-900 mb-2">Belum Ada Menu</h3>
+                <p className="text-slate-600 mb-6 max-w-md mx-auto">
+                  Belum ada menu di kantin ini. Mulai tambahkan menu pertama untuk menarik pelanggan!
+                </p>
+                <Link 
+                  href={`${baseUrl}/add-menu`}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-medium shadow-sm"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                  <span>Tambah Menu Pertama</span>
+                </Link>
+              </div>
+            ) : (
+              <div className="grid gap-4">
+                {daftarMenu.map((menu) => (
+                  <MenuListItem 
+                    key={menu.id_menu} 
+                    menu={menu} 
+                    baseUrl={baseUrl} 
+                  />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

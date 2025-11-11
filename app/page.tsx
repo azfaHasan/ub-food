@@ -130,7 +130,7 @@ function KantinCard({ kantin }: { kantin: KantinWithPenjual }) {
       <div className="mt-4 pt-4 border-t border-slate-100">
         <div className="flex items-center justify-between text-sm">
           <span className="text-slate-500">Jam Operasi</span>
-          <span className="font-semibold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg">
+          <span className="font-semibold text-red-700 bg-blue-50 px-2.5 py-1 rounded-lg">
             {formatJam(kantin.jam_buka)} - {formatJam(kantin.jam_tutup)}
           </span>
         </div>
@@ -145,7 +145,7 @@ export default async function HomePage() {
 
   return (
     // Latar belakang gradien diterapkan di root
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-pink-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50">
       
       {/* Kontainer utama dengan padding dan max-width */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -153,7 +153,7 @@ export default async function HomePage() {
         {/* Kartu Header Utama (diambil dari gaya referensi) */}
         <div className="mb-8">
           <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-6">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-600 px-8 py-6">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
                   <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm shadow-lg">

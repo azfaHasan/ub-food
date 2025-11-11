@@ -63,7 +63,7 @@ export default async function AdminDetailKantinPage({
   const baseUrl = `/admin/kantin/${paramsNew.id_kantin}`;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         {/* Breadcrumb Navigation */}
@@ -83,7 +83,7 @@ export default async function AdminDetailKantinPage({
         <div className="mb-8">
           <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
             {/* Header with gradient */}
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-6">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-600 px-8 py-6">
               <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                 <div className="flex items-start gap-4 flex-1">
                   <div className="flex-shrink-0">
