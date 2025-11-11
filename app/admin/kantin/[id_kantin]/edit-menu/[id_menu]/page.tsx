@@ -40,7 +40,7 @@ export default async function AdminEditMenuPage({ params }: EditMenuPageProps) {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         {/* Breadcrumb Navigation */}
@@ -68,7 +68,7 @@ export default async function AdminEditMenuPage({ params }: EditMenuPageProps) {
         {/* Page Header */}
         <div className="mb-8">
           <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-orange-500 to-red-500 px-8 py-6">
+            <div className="bg-gradient-to-r from-blue-500 to-blue-500 px-8 py-6">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
                   <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm shadow-lg">
