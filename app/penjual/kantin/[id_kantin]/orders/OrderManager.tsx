@@ -1,5 +1,3 @@
-// Path: app/penjual/kantin/[id_kantin]/orders/OrderManager.tsx
-
 'use client';
 
 import { useState, useEffect } from 'react';

@@ -59,7 +59,7 @@ export default async function AdminDashboardPage() {
             </div>
             
             {/* Stats Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-slate-200">
+            <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-slate-200">
               <div className="px-8 py-6">
                 <div className="flex items-center gap-4">
                   <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-50">
@@ -70,19 +70,6 @@ export default async function AdminDashboardPage() {
                   <div>
                     <p className="text-sm font-medium text-slate-500">Total Kantin</p>
                     <p className="text-2xl font-bold text-slate-900">{semuaKantin.length}</p>
-                  </div>
-                </div>
-              </div>
-              <div className="px-8 py-6">
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-green-50">
-                    <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-slate-500">Status</p>
-                    <p className="text-2xl font-bold text-slate-900">Aktif</p>
                   </div>
                 </div>
               </div>
@@ -112,21 +99,9 @@ export default async function AdminDashboardPage() {
                 <p className="text-slate-600 mt-1">Kelola dan moderasi semua kantin terdaftar</p>
               </div>
               <div className="flex items-center gap-3">
-                {/* <button className="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 transition-colors text-sm font-medium flex items-center gap-2">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-                  </svg>
-                  Filter
-                </button> */}
-                {/* <button className="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-colors text-sm font-medium flex items-center gap-2 shadow-sm">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                  </svg>
-                  Tambah Kantin
-                </button> */}
-              </div>
             </div>
           </div>
+        </div>
 
           <div className="p-8">
             {semuaKantin.length === 0 ? (

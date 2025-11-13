@@ -30,9 +30,9 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
-          <main className="p-4">
+          <main className="p-0">
             <Navbar/>
-            <section className="mt-4 min-h-[70vh] rounded-[8px] bg-[#DDE8FF]">
+            <section className="mt-0 min-h-[70vh] rounded-[8px] bg-[#DDE8FF]">
               {children}
             </section>
           </main>

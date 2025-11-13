@@ -107,7 +107,6 @@
 //   );
 // }
 
-// Path: app/penjual/kantin/[id_kantin]/orders/page.tsx
 
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
@@ -118,7 +117,7 @@ import OrderManager from "./OrderManager"; // Komponen Client Baru
 
 export const dynamic = 'force-dynamic';
 
-// Tipe ini akan kita gunakan di komponen client
+// Tipe ini akan digunakan di komponen client
 export type PesananAktifWithDetails = Awaited<ReturnType<typeof getPesananAktif>>[0];
 
 async function getPesananAktif(id_kantin: string) {

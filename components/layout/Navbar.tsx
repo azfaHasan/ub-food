@@ -99,10 +99,10 @@ export default function Navbar() {
 
   return (
     <div
-      className="w-full mt-4 rounded-[8px]"
+      className="w-full mt-0 rounded-[0px] bg-gradient-to-r from-blue-600 to-blue-600"
       style={{
         height: 96,
-        backgroundColor: "#3B81F4",
+        // backgroundColor: "#3B81F4",
         boxShadow: "0 2px 8px rgba(0,0,0,0.10)",
       }}
       role="navigation"

@@ -1,11 +1,9 @@
-// Path: app/penjual/kantin/[id_kantin]/orders/ManageOrderForm.tsx
-
 'use client';
 
 import { useState, useTransition } from 'react';
 import type { PesananAktifWithDetails } from './page';
 import { StatusPemesanan } from '@prisma/client';
-import { updatePemesananStatus } from '@/actions/pesanan.actions'; // Action baru
+import { updatePemesananStatus } from '@/lib/actions/pesanan.actions'; // Action baru
 
 // Tipe untuk props
 interface ManageOrderFormProps {

@@ -15,8 +15,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50;
-    /* --background: #DDEBFF; */
+    /* --background: red; */
+    --background: #DDEBFF;
     --foreground: #ededed;
   }
 }
