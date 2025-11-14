@@ -42,11 +42,6 @@ export default async function UserPage() {
                         {userData.nama_user.charAt(0).toUpperCase()}
                       </span>
                     </div>
-                    <div className="absolute -bottom-2 -right-2 flex items-center justify-center w-10 h-10 rounded-xl bg-green-500 border-4 border-white shadow-lg">
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
                   </div>
                 </div>
                 
@@ -63,7 +58,7 @@ export default async function UserPage() {
                       @{userData.Akun.username}
                     </span>
                     <span className="px-3 py-1 text-sm font-medium bg-white/20 backdrop-blur-sm text-white rounded-full">
-                      👤 User
+                      User
                     </span>
                   </div>
                 </div>

@@ -68,7 +68,7 @@ export default async function AdminEditMenuPage({ params }: EditMenuPageProps) {
         {/* Page Header */}
         <div className="mb-8">
           <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
-            <div className="bg-gradient-to-r from-blue-500 to-blue-500 px-8 py-6">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-600 px-8 py-6">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
                   <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm shadow-lg">
@@ -79,18 +79,18 @@ export default async function AdminEditMenuPage({ params }: EditMenuPageProps) {
                 </div>
                 
                 <div className="flex-1 min-w-0">
+                  <h1 className="text-3xl font-bold text-white mb-2">
+                    Edit Menu
+                  </h1>
+                  <p className="text-slate-100 text-lg font-medium">
+                    {menu.nama_menu}
+                  </p>
+                </div>
                   <div className="flex items-center gap-2 mb-2">
                     <span className="px-3 py-1 text-xs font-semibold bg-white/20 backdrop-blur-sm text-white rounded-full uppercase tracking-wide">
                       Admin Mode
                     </span>
                   </div>
-                  <h1 className="text-3xl font-bold text-white mb-2">
-                    Edit Menu
-                  </h1>
-                  <p className="text-orange-100 text-lg font-medium">
-                    {menu.nama_menu}
-                  </p>
-                </div>
               </div>
             </div>
 
