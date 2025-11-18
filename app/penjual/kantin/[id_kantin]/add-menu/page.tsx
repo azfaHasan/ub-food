@@ -14,6 +14,8 @@ export default function TambahMenuPage() {
     deskripsi_menu: '',
     stok_menu: '0',
   });
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
@@ -26,18 +28,58 @@ export default function TambahMenuPage() {
     }));
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Validasi tipe file
+      if (!file.type.startsWith('image/')) {
+        setError('File harus berupa gambar');
+        return;
+      }
+      
+      // Validasi ukuran file (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        setError('Ukuran file maksimal 5MB');
+        return;
+      }
+
+      setSelectedFile(file);
+      
+      // Buat preview
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewUrl(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+      setError(null);
+    }
+  };
+
+  const removeImage = () => {
+    setSelectedFile(null);
+    setPreviewUrl(null);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
 
     try {
+      // Buat FormData untuk mengirim file
+      const submitData = new FormData();
+      submitData.append('nama_menu', formData.nama_menu);
+      submitData.append('harga_menu', formData.harga_menu);
+      submitData.append('deskripsi_menu', formData.deskripsi_menu);
+      submitData.append('stok_menu', formData.stok_menu);
+      
+      if (selectedFile) {
+        submitData.append('foto_menu', selectedFile);
+      }
+
       const response = await fetch(`/api/kantin/${id_kantin}/menu`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ...formData }),
+        body: submitData, // Kirim FormData, bukan JSON
       });
 
       if (!response.ok) {
@@ -237,21 +279,94 @@ export default function TambahMenuPage() {
               }}>
                 Foto Menu
               </label>
-              <div style={{ 
-                border: '2px dashed #D1D5DB',
-                borderRadius: '8px',
-                padding: '60px 20px',
-                textAlign: 'center',
-                cursor: 'pointer',
-                backgroundColor: '#FAFAFA'
-              }}>
-                <svg style={{ width: '40px', height: '40px', color: '#9CA3AF', margin: '0 auto 12px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                </svg>
-                <p style={{ color: '#6B7280', fontSize: '14px', margin: 0 }}>
-                  Klik untuk unggah foto menu
-                </p>
-              </div>
+              
+              {!previewUrl ? (
+                <label style={{ 
+                  border: '2px dashed #D1D5DB',
+                  borderRadius: '8px',
+                  padding: '60px 20px',
+                  textAlign: 'center',
+                  cursor: 'pointer',
+                  backgroundColor: '#FAFAFA',
+                  display: 'block',
+                  transition: 'all 0.3s'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#3B81F4';
+                  e.currentTarget.style.backgroundColor = '#F0F7FF';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = '#D1D5DB';
+                  e.currentTarget.style.backgroundColor = '#FAFAFA';
+                }}>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    style={{ display: 'none' }}
+                  />
+                  <svg style={{ width: '40px', height: '40px', color: '#9CA3AF', margin: '0 auto 12px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                  </svg>
+                  <p style={{ color: '#6B7280', fontSize: '14px', margin: 0 }}>
+                    Klik untuk unggah foto menu
+                  </p>
+                  <p style={{ color: '#9CA3AF', fontSize: '12px', marginTop: '8px' }}>
+                    PNG, JPG, JPEG (max. 5MB)
+                  </p>
+                </label>
+              ) : (
+                <div style={{ 
+                  border: '1px solid #D1D5DB',
+                  borderRadius: '8px',
+                  padding: '20px',
+                  backgroundColor: '#FAFAFA',
+                  position: 'relative'
+                }}>
+                  <img 
+                    src={previewUrl} 
+                    alt="Preview" 
+                    style={{ 
+                      width: '100%',
+                      maxHeight: '300px',
+                      objectFit: 'contain',
+                      borderRadius: '8px'
+                    }} 
+                  />
+                  <button
+                    type="button"
+                    onClick={removeImage}
+                    style={{ 
+                      position: 'absolute',
+                      top: '30px',
+                      right: '30px',
+                      background: '#EF4444',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '50%',
+                      width: '32px',
+                      height: '32px',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+                    }}
+                  >
+                    <svg style={{ width: '18px', height: '18px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                  <p style={{ 
+                    color: '#6B7280', 
+                    fontSize: '13px', 
+                    marginTop: '12px',
+                    textAlign: 'center'
+                  }}>
+                    {selectedFile?.name}
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Error & Success Messages */}

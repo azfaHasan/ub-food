@@ -128,7 +128,7 @@ export default async function KeranjangPage() {
     }
   });
 
-  const items = keranjang?.DetailKeranjang || [];  
+  const items = keranjang?.DetailKeranjang || [];
   const kantinNama = items.length > 0 ? items[0].Menu.Kantin.nama_kantin : null;
   const totalHarga = items.reduce((total, item) => {
     return total + (item.jumlah * item.Menu.harga_menu);
@@ -139,7 +139,7 @@ export default async function KeranjangPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          
+
           {/* Header Card */}
           <div className="mb-6">
             <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
@@ -201,7 +201,7 @@ export default async function KeranjangPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
+
         {/* Header Card */}
         <div className="mb-6">
           <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
@@ -231,7 +231,7 @@ export default async function KeranjangPage() {
 
         {/* Main Card (Items, Total, Form) */}
         <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
-          
+
           {/* Card Header */}
           <div className="px-8 py-6 border-b border-slate-200 bg-gradient-to-r from-slate-50 to-slate-100">
             <div className="flex items-center gap-3">
@@ -279,7 +279,7 @@ export default async function KeranjangPage() {
               ))}
             </div>
           </div>
-          
+
           {/* Total Section */}
           <div className="px-8 py-6 border-t-2 border-slate-200">
             <div className="flex items-center justify-between">
