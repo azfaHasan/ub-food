@@ -6,9 +6,9 @@ import KantinEditForm from "@/components/KantinEditForm";
 import Link from "next/link";
 
 interface EditKantinPageProps {
-  params: {
+  params: Promise<{
     id_kantin: string;
-  };
+  }>;
 }
 
 export default async function EditKantinProfilePage({ params }: EditKantinPageProps) {
@@ -18,9 +18,11 @@ export default async function EditKantinProfilePage({ params }: EditKantinPagePr
     redirect("/login");
   }
 
+  const paramsNew = await params;
+
   const kantin = await prisma.kantin.findFirst({
     where: { 
-      id_kantin: params.id_kantin,
+      id_kantin: paramsNew.id_kantin,
       id_penjual: session.penjual.id
     },
   });
@@ -48,7 +50,7 @@ export default async function EditKantinProfilePage({ params }: EditKantinPagePr
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
             <Link 
-              href={`/penjual/kantin/${params.id_kantin}`} 
+              href={`/penjual/kantin/${paramsNew.id_kantin}`} 
               className="text-slate-600 hover:text-emerald-600 transition-colors font-medium"
             >
               Detail Kantin
@@ -173,7 +175,7 @@ export default async function EditKantinProfilePage({ params }: EditKantinPagePr
           </div>
           <div className="flex gap-3">
             <Link
-              href={`/penjual/kantin/${params.id_kantin}`}
+              href={`/penjual/kantin/${paramsNew.id_kantin}`}
               className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-slate-100 text-slate-700 rounded-xl hover:bg-slate-200 transition-colors font-medium text-sm"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
