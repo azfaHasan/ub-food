@@ -1,75 +1,3 @@
-// import { auth } from "@/auth";
-// import { redirect, notFound } from "next/navigation";
-// import { prisma } from "@/lib/prisma";
-// import { Role } from "@prisma/client";
-// import { updateMenu, type FormState } from "@/lib/actions/menu.actions"; 
-// import MenuEditForm from "@/components/MenuEditForm"; 
-// import { type Session } from "next-auth";
-
-// interface EditMenuPageProps {
-//   params: {
-//     id_kantin: string;
-//     id_menu: string;
-//   };
-// }
-
-// async function canModifyMenu(kantinId: string, session: Session | null) {
-//   if (!session) return false;
-
-//   if (session.user.role === Role.ADMIN) return true;
-
-//   if (session.penjual?.id) {
-//     const kantin = await prisma.kantin.findFirst({
-//       where: { id_kantin: kantinId, id_penjual: session.penjual.id },
-//     });
-//     return !!kantin;
-//   }
-//   return false;
-// }
-
-// export default async function EditMenuPage({ params }: EditMenuPageProps) {
-  
-//   const session = await auth();
-//   const hasAccess = await canModifyMenu(params.id_kantin, session);
-  
-//   if (!hasAccess) {
-//     redirect("/login");
-//   }
-
-//   const menu = await prisma.menu.findUnique({
-//     where: { 
-//       id_menu: params.id_menu,
-//       id_kantin: params.id_kantin,
-//     },
-//   });
-
-//   if (!menu) {
-//     notFound();
-//   }
-  
-//   const updateMenuWithIds = updateMenu.bind(
-//     null,
-//     menu.id_menu,
-//     menu.id_kantin
-//   );
-
-//   return (
-//     <div className="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-//       <h1 className="text-2xl font-bold mb-6">Edit Menu: {menu.nama_menu}</h1>
-//       <MenuEditForm
-//         menu={menu} 
-//         updateMenuAction={
-//           updateMenuWithIds as (
-//             prevState: FormState,
-//             formData: FormData
-//           ) => Promise<FormState>
-//         }
-//       />
-//     </div>
-//   );
-// }
-
-
 import { auth } from "@/auth";
 import { redirect, notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
@@ -77,23 +5,20 @@ import { Role } from "@prisma/client";
 import { updateMenu, type FormState } from "@/lib/actions/menu.actions"; 
 import MenuEditForm from "@/components/MenuEditForm"; 
 import { type Session } from "next-auth";
-import Link from "next/link"; // Ditambahkan untuk breadcrumbs
+import Link from "next/link";
 
 interface EditMenuPageProps {
-  params: {
+  params: Promise<{
     id_kantin: string;
     id_menu: string;
-  };
+  }>;
 }
 
 async function canModifyMenu(kantinId: string, session: Session | null) {
   if (!session) return false;
 
   if (session.user.role === Role.ADMIN) return true;
-
-  // Asumsi dari kode Anda, penjual ada di session.penjual.id
-  // Jika menggunakan id_akun dari session.user.akunId, sesuaikan di sini
-  const penjualId = session.penjual?.id; // Sesuaikan ini jika perlu
+  const penjualId = session.penjual?.id;
   
   if (penjualId) {
     const kantin = await prisma.kantin.findFirst({
@@ -102,17 +27,14 @@ async function canModifyMenu(kantinId: string, session: Session | null) {
     return !!kantin;
   }
   
-  // Jika 'session.penjual.id' tidak ada, mungkin Anda perlu
-  // mengecek berdasarkan 'session.user.akunId' ke tabel Penjual.
-  // Tapi saya akan ikuti logika asli Anda.
-  
   return false;
 }
 
 export default async function EditMenuPage({ params }: EditMenuPageProps) {
   
+  const paramsNew = await params;
   const session = await auth();
-  const hasAccess = await canModifyMenu(params.id_kantin, session);
+  const hasAccess = await canModifyMenu(paramsNew.id_kantin, session);
   
   if (!hasAccess) {
     // Arahkan ke login penjual jika lebih sesuai
@@ -121,8 +43,8 @@ export default async function EditMenuPage({ params }: EditMenuPageProps) {
 
   const menu = await prisma.menu.findUnique({
     where: { 
-      id_menu: params.id_menu,
-      id_kantin: params.id_kantin,
+      id_menu: paramsNew.id_menu,
+      id_kantin: paramsNew.id_kantin,
     },
   });
 
@@ -149,7 +71,7 @@ export default async function EditMenuPage({ params }: EditMenuPageProps) {
             <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-            <Link href={`/penjual/kantin/${params.id_kantin}`} className="text-slate-600 hover:text-purple-600 transition-colors font-medium">
+            <Link href={`/penjual/kantin/${paramsNew.id_kantin}`} className="text-slate-600 hover:text-purple-600 transition-colors font-medium">
               Detail Kantin
             </Link>
             <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -215,7 +137,6 @@ export default async function EditMenuPage({ params }: EditMenuPageProps) {
             />
           </div>
         </div>
-
       </div>
     </div>
   );
